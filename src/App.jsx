@@ -15,11 +15,12 @@ const App = () => {
   };
 
   return (
-    <div>
+    <>
       <AddUser onAddUser={addUserHandler} />
       <UserList users={usersList} />
-    </div>
+    </>
   );
 };
 
 export default App;
+// instead of <> could include Fragment which will always work import it into React though
