@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Wrapper from '../Helpers/Wrapper';
 import Card from '../UI/Card/Card';
 import Button from '../UI/Button/Button';
 import styles from './AddUser.module.css';
@@ -15,14 +16,14 @@ const AddUser = (props) => {
       setError({
         title: 'Username or Age entry invalid',
         message: 'Sumin Sumin has been entered a little kaka',
-      })
+      });
       return;
     }
     if (+enteredAge < 1) {
       setError({
         title: 'Age entry invalid',
         message: 'You are definetly not that young',
-      })
+      });
       return;
     }
 
@@ -40,34 +41,40 @@ const AddUser = (props) => {
   };
 
   const errorHandler = () => {
-    setError(null)
-  }
+    setError(null);
+  };
 
   return (
-    <div>
-      {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler} />}
-    <Card className={styles.input}>
-      <form onSubmit={addUserHandler}>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={enteredUserName}
-          onChange={usernameChangeHandler}
-          placeholder="Add username"
+    <Wrapper>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
         />
-        <label htmlFor="age">Age</label>
-        <input
-          id="age"
-          type="number"
-          value={enteredAge}
-          onChange={ageChangeHandler}
-          placeholder="Add age"
-        />
-        <Button type="submit">Add User</Button>
-      </form>
-    </Card>
-    </div>
+      )}
+      <Card className={styles.input}>
+        <form onSubmit={addUserHandler}>
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            value={enteredUserName}
+            onChange={usernameChangeHandler}
+            placeholder="Add username"
+          />
+          <label htmlFor="age">Age</label>
+          <input
+            id="age"
+            type="number"
+            value={enteredAge}
+            onChange={ageChangeHandler}
+            placeholder="Add age"
+          />
+          <Button type="submit">Add User</Button>
+        </form>
+      </Card>
+    </Wrapper>
   );
 };
 export default AddUser;
